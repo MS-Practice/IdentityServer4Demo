@@ -264,7 +264,5 @@ __pycache__/
 .vscode/
 bin
 obj
-bin
-obj
-/AuthServer/obj
-obj
+obj/
+bin/

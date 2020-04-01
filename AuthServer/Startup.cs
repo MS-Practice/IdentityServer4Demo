@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IdentityServer4;
+using IdentityServer4.Quickstart.UI;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +12,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 
 namespace AuthServer
 {
@@ -25,14 +28,40 @@ namespace AuthServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddControllers();
+            services.AddControllersWithViews();
+
             var builder = services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
                 .AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
                 .AddInMemoryApiResources(Configs.Config.GetApis())
-                .AddInMemoryClients(Configs.Config.GetClients());
+                .AddInMemoryClients(Configs.Config.GetClients())
+                .AddTestUsers(TestUsers.Users);
 
-            
+            builder.AddDeveloperSigningCredential();
+
+            // Ìí¼Ó ocid
+            services.AddAuthentication()
+                .AddOpenIdConnect("oidc", "Demo IdentityServer", options =>
+                {
+                    options.RequireHttpsMetadata = false;
+
+                    options.SignInScheme = IdentityServerConstants.ExternalCookieAuthenticationScheme;
+                    options.SignOutScheme = IdentityServerConstants.SignoutScheme;
+                    options.SaveTokens = true;
+                    
+
+
+                    options.Authority = "http://localhost:5000/";
+                    options.ClientId = "mvc";
+                    options.ClientSecret = "secret";
+                    options.ResponseType = "id_token token";
+
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "name",
+                        RoleClaimType = "role"
+                    };
+                });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,18 +72,19 @@ namespace AuthServer
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseStaticFiles();
+            app.UseRouting();
+
             app.UseIdentityServer();
 
-            //app.UseHttpsRedirection();
+            app.UseHttpsRedirection();
 
-            //app.UseRouting();
+            app.UseAuthorization();
 
-            //app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapDefaultControllerRoute();
+            });
         }
     }
 }
