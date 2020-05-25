@@ -11,7 +11,7 @@ namespace AuthServer.Configs
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
-            return new IdentityResource[] { 
+            return new IdentityResource[] {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
             };
@@ -21,7 +21,7 @@ namespace AuthServer.Configs
         {
             return new List<ApiResource>
             {
-                new ApiResource("Api", "BBSS OpenApi")
+                new ApiResource("api1", "My API")
             };
         }
 
@@ -31,26 +31,39 @@ namespace AuthServer.Configs
             {
                 new Client
                 {
-                    ClientId = "mvc",
+                    ClientId = "client",
+                    AllowedGrantTypes = GrantTypes.ClientCredentials,
+
                     // secret for authentication
                     ClientSecrets =
                     {
                         new Secret("secret".Sha256())
-                    },
-
-                    AllowedGrantTypes = GrantTypes.Implicit,
-                    // 登录成功的回调地址，这里应该获取客户端请求传过来的 RedirectUrl
-                    RedirectUris = { "http://localhost:5004/signin-oidc" },
-                    // 退出登录回调的地址
-                    PostLogoutRedirectUris = { "http://localhost:5004/signout-callback-oidc" },
-
-                    
+                    }, 
 
                     // scopes that client has access to
-                    AllowedScopes = { 
-                        IdentityServerConstants.StandardScopes.OpenId,
-                        IdentityServerConstants.StandardScopes.Profile
+                    AllowedScopes = {
+                        "api1"
                     }
+                },
+                new Client
+                {
+                    ClientId = "MvcClient",
+                    ClientSecrets =
+                    {
+                        new Secret("secret".Sha256())
+                    },
+                    AllowedGrantTypes = GrantTypes.Code,
+                    // 登录成功之后重定向的地址
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+
+                    // 退出登录重定向的地址
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
+                    AllowedScopes = {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api1"
+                    },
+                    AllowOfflineAccess = true   // 支持刷新令牌
                 }
             };
         }

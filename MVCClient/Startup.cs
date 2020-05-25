@@ -40,10 +40,15 @@ namespace MVCClient
             {
                 options.Authority = "http://localhost:5000";
                 options.RequireHttpsMetadata = false;
-                options.ClientId = "mvc";
+                options.ClientId = "MvcClient";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-                options.SaveTokens = true;
+
+                options.SaveTokens = true;  // 会在授权会话中自动存储访问的结果和刷新token
+
+                options.Scope.Add("api1");
+                options.Scope.Add("offline_access");
+
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     NameClaimType = JwtClaimTypes.Name,

@@ -20,10 +20,10 @@ namespace MVCClient.Config
                     AllowedGrantTypes = GrantTypes.Implicit,
 
                     // 登录成功回调处理地址，处理回调返回的数据
-                    RedirectUris = { "http://localhost:5004/signin-oidc" },
+                    RedirectUris = { "http://localhost:5002/signin-oidc" },
 
                     // where to redirect to after logout
-                    PostLogoutRedirectUris = { "http://localhost:5004/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {

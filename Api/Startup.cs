@@ -34,7 +34,7 @@ namespace Api
                     options.Authority = "http://localhost:5000";
                     options.RequireHttpsMetadata = false;
 
-                    options.Audience = "Api";
+                    options.Audience = "api1";
                 });
         }
 

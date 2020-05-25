@@ -22,9 +22,9 @@ namespace Client
             var tokenResponse = await client.RequestClientCredentialsTokenAsync(new ClientCredentialsTokenRequest
             {
                 Address = disco.TokenEndpoint,
-                ClientId = "Client",
+                ClientId = "client",
                 ClientSecret = "secret",
-                Scope = "Api"
+                Scope = "api1"
             });
 
             if (tokenResponse.IsError)
