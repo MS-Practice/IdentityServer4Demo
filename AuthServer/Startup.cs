@@ -34,12 +34,14 @@ namespace AuthServer
 
             IdentityModelEventSource.ShowPII = true;
 
-            var builder = services.AddIdentityServer()
-                .AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
-                .AddInMemoryApiResources(Configs.Config.GetApis())
-                .AddInMemoryClients(Configs.Config.GetClients())
-                .AddTestUsers(TestUsers.Users)
-                ;
+            var builder = services.AddIdentityServer(action =>
+            {
+                action.UserInteraction.LoginUrl = "/account/login"; // 修改默认得登录地址
+            })
+            .AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
+            .AddInMemoryApiResources(Configs.Config.GetApis())
+            .AddInMemoryClients(Configs.Config.GetClients())
+            .AddTestUsers(TestUsers.Users);
 
             builder.AddDeveloperSigningCredential();
         }
