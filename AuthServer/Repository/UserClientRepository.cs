@@ -12,6 +12,27 @@ namespace AuthServer.Repository
 {
     public class UserClientRepository : BasicRepositoryBase<UserClient, long>
     {
+        private readonly List<UserClient> userClients = new List<UserClient>() {
+            new UserClient{
+                    Id = 1,
+                    ClientId = "marsonshine",
+                    ClientName = "Marson Shine",
+                    Password = "secret"
+            },
+            new UserClient{
+                Id = 2,
+                ClientId = "summerzhu",
+                ClientName = "Summer Zhu",
+                Password = "secret"
+            },
+            new UserClient{
+                Id = 3,
+                ClientId = "bluceli",
+                ClientName = "Bluce Li",
+                Password = "secret"
+            }
+        };
+
         public override Task<bool> DeleteAsync([NotNull] long id, CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
@@ -22,9 +43,10 @@ namespace AuthServer.Repository
             throw new NotImplementedException();
         }
 
-        public override Task<UserClient> FindAsync([NotNull] Expression<Func<UserClient, bool>> predicate, CancellationToken cancellationToken = default)
+        public override async Task<UserClient> FindAsync([NotNull] Expression<Func<UserClient, bool>> predicate, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var info = userClients.SingleOrDefault(predicate.Compile());
+            return await Task.FromResult(info);
         }
 
         public override Task<UserClient> GetAsync([NotNull] long id, CancellationToken cancellationToken = default)

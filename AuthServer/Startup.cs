@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AuthServer.Repository;
+using AuthServer.Services;
 using AuthServer.Stores;
 using IdentityServer4;
 using IdentityServer4.Quickstart.UI;
+using IdentityServer4.Services;
+using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -40,11 +44,17 @@ namespace AuthServer
             })
             .AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
             .AddInMemoryApiResources(Configs.Config.GetApis())
-            .AddInMemoryClients(Configs.Config.GetClients())
-            .AddTestUsers(TestUsers.Users);
-            //.AddClientStore<InDatabaseClientStore>();
-
+            //.AddInMemoryClients(Configs.Config.GetClients())
+            .AddTestUsers(TestUsers.Users)
+            .AddCustomTokenRequestValidator<BBSSTokenRequestValidator>()
+            .AddProfileService<ProfileService>()
+            .AddClientStore<InDatabaseClientStore>()
+            ;
             builder.AddDeveloperSigningCredential();
+
+            builder.Services.AddTransient<UserClientRepository>();
+            builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
+            builder.Services.AddTransient<IProfileService, ProfileService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

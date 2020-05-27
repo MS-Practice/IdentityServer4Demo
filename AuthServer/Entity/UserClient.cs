@@ -11,5 +11,6 @@ namespace AuthServer.Entity
         public long Id { get; set; }
         public string ClientId { get; set; }
         public string ClientName { get; set; }
+        public string Password { get; set; }
     }
 }
