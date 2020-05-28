@@ -8,6 +8,7 @@ using AuthServer.Stores;
 using IdentityServer4;
 using IdentityServer4.Quickstart.UI;
 using IdentityServer4.Services;
+using IdentityServer4.Stores;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -41,18 +42,20 @@ namespace AuthServer
             var builder = services.AddIdentityServer(action =>
             {
                 action.UserInteraction.LoginUrl = "/account/login"; // 修改默认得登录地址
-            })
-            .AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
-            .AddInMemoryApiResources(Configs.Config.GetApis())
-            //.AddInMemoryClients(Configs.Config.GetClients())
-            .AddTestUsers(TestUsers.Users)
-            .AddCustomTokenRequestValidator<BBSSTokenRequestValidator>()
-            .AddProfileService<ProfileService>()
-            .AddClientStore<InDatabaseClientStore>()
-            ;
+            });
+            builder.Services.AddTransient<UserClientRepository>();
+            builder.Services.AddTransient<ApiResourceRepository>();
+
+            builder.AddInMemoryIdentityResources(Configs.Config.GetIdentityResources())
+                //.AddInMemoryApiResources(Configs.Config.GetApis())
+                .AddResourceStore<InDatabaseResourceStore>()
+                .AddClientStore<InDatabaseClientStore>()
+                .AddTestUsers(TestUsers.Users)
+                .AddCustomTokenRequestValidator<BBSSTokenRequestValidator>()
+                .AddProfileService<ProfileService>()
+                ;
             builder.AddDeveloperSigningCredential();
 
-            builder.Services.AddTransient<UserClientRepository>();
             builder.Services.AddTransient<IResourceOwnerPasswordValidator, ResourceOwnerPasswordValidator>();
             builder.Services.AddTransient<IProfileService, ProfileService>();
         }

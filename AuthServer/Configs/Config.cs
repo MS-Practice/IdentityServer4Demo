@@ -11,9 +11,15 @@ namespace AuthServer.Configs
     {
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
+            //var api1IdentityResource = new IdentityResource(
+            //    name: "api1",
+            //    displayName: "Custom profile",
+            //    claimTypes: new[] { "name", "email", "status" });
+
             return new IdentityResource[] {
                 new IdentityResources.OpenId(),
                 new IdentityResources.Profile(),
+                //api1IdentityResource
             };
         }
 

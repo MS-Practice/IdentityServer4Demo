@@ -18,7 +18,7 @@ namespace AuthServer.Services
         {
             var validatedRequest = context.Result.ValidatedRequest;
             var clientId = validatedRequest.ClientId;
-            var password = validatedRequest.Secret.Id;
+            var password = validatedRequest.Secret.Credential.ToString();
             try
             {
                 var user = await _userClientRepository.FindAsync(p => p.ClientId == clientId);

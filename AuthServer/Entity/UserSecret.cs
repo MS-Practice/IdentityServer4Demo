@@ -8,6 +8,6 @@ namespace AuthServer.Entity
 {
     public class UserSecret
     {
-        public static Secret Shared => new Secret("secret", "common shared secret", DateTime.Now.AddHours(2));
+        public static Secret Shared => new Secret("secret".Sha256(), "common shared secret", DateTime.Now.AddHours(2));
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AuthServer.Entity;
+using AuthServer.Repository;
 using BBSS.Platform.Core.Repository;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
@@ -11,9 +12,9 @@ namespace AuthServer.Stores
 {
     public class InDatabaseClientStore : IClientStore
     {
-        private readonly IBasicRepository<UserClient, long> _repository;
+        private readonly UserClientRepository _repository;
         private List<UserClient> users;
-        public InDatabaseClientStore(IBasicRepository<UserClient, long> repository)
+        public InDatabaseClientStore(UserClientRepository repository)
         {
             _repository = repository;
             LoadTestData();
@@ -44,17 +45,26 @@ namespace AuthServer.Stores
         public async Task<Client> FindClientByIdAsync(string clientId)
         {
             var client = users.FirstOrDefault(p => p.ClientId == clientId);
-            return await Task.FromResult(new Client
-            {
-                ClientId = client.ClientId,
-                ClientName = client.ClientName,
-                ClientSecrets = {
-                    UserSecret.Shared
-                },
-                AllowedScopes = {
-                    "api1"
-                }
-            });
+            Client c = client == null ?
+                null :
+                new Client
+                {
+                    ClientId = client.ClientId,
+                    ClientName = client.ClientName,
+                    ClientSecrets = {
+                        UserSecret.Shared
+                    },
+                    AllowedGrantTypes = {
+                        GrantType.ClientCredentials,
+                        //GrantType.AuthorizationCode
+                    },
+                    AllowedScopes = {
+                        "api1"
+                    },
+                    Enabled = true
+                };
+
+            return await Task.FromResult(c);
         }
     }
 }
