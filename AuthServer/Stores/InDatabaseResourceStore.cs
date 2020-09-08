@@ -28,7 +28,7 @@ namespace AuthServer.Stores
 
         public async Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            var bbssApiResouce = await _repository.GetListByScopeAsync(string.Join(',', scopeNames));
+            var bbssApiResouce = await _repository.GetListByScopeAsync(scopeNames.ToArray());
 
             var apis = bbssApiResouce.ConvertAll(bbssApi => bbssApi.ToApiResouce());
 

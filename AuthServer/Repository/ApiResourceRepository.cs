@@ -41,9 +41,9 @@ namespace AuthServer.Repository
             };
         }
 
-        public async Task<List<BBSSApiResource>> GetListByScopeAsync(string scope)
+        public async Task<List<BBSSApiResource>> GetListByScopeAsync(string[] scopes)
         {
-            var list = source.Where(p => p.Name == scope).ToList();
+            var list = source.Where(p => scopes.Contains(p.Name)).ToList();
             return await Task.FromResult(list);
         }
 

@@ -30,6 +30,27 @@ namespace AuthServer.Repository
                 ClientId = "bluceli",
                 ClientName = "Bluce Li",
                 Password = "secret"
+            },
+            new UserClient
+            {
+                Id = 4,
+                ClientId = "client",
+                ClientName = "Client",
+                Password = "secret"
+            },
+            new UserClient
+            {
+                Id = 5,
+                ClientId = "MvcClient",
+                ClientName = "MvcClient",
+                Password = "secret"
+            },
+            new UserClient
+            {
+                Id = 6,
+                ClientId = "MvvMClient",
+                ClientName = "MvvMClient",
+                Password = "secret"
             }
         };
 

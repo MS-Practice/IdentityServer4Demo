@@ -25,6 +25,7 @@ namespace MVCClient
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII = true;
             services.AddControllersWithViews();
 
             JwtSecurityTokenHandler.DefaultMapInboundClaims = false;
@@ -38,21 +39,25 @@ namespace MVCClient
             .AddCookie("Cookies", options => options.Cookie.Name = "mvccode")
             .AddOpenIdConnect("oidc", options =>
             {
-                options.Authority = "http://localhost:5000";
+                options.Authority = "http://www.au.net:5000/";
                 options.RequireHttpsMetadata = false;
-                options.ClientId = "MvcClient";
+                options.ClientId = "client";
                 options.ClientSecret = "secret";
                 options.ResponseType = "code";
-
                 options.SaveTokens = true;  // 会在授权会话中自动存储访问的结果和刷新token
 
                 options.Scope.Add("api1");
-                options.Scope.Add("offline_access");
+                //options.Scope.Add("offline_access");
 
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     NameClaimType = JwtClaimTypes.Name,
                     RoleClaimType = JwtClaimTypes.Role
+                };
+                options.Events.OnRedirectToIdentityProvider = async n =>
+                {
+                    //n.ProtocolMessage.RedirectUri = "http://localhost:500ome";
+                    await Task.FromResult(0);
                 };
             });
         }

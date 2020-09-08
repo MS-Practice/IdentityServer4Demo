@@ -1,6 +1,7 @@
 ﻿using AuthServer.Entity;
 using AuthServer.Repository;
 using BBSS.Platform.Core.Repository;
+using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 using System;
@@ -38,6 +39,30 @@ namespace AuthServer.Stores
                     Id = 3,
                     ClientId = "bluceli",
                     ClientName = "Bluce Li"
+                },
+                new UserClient
+                {
+                    Id = 4,
+                    ClientId = "client",
+                    ClientName = "Client",
+                    Password = "secret",
+                    RedirectUris = new []{ "http://www.a.net:5002/signin-oidc", "http://www.b.net:5003/signin-oidc", "http://www.b.net:5003/" }
+                },
+                new UserClient
+                {
+                    Id = 5,
+                    ClientId = "MvcClient",
+                    ClientName = "MvcClient",
+                    Password = "secret",
+                    RedirectUris = new []{ "http://www.a.net:5002/signin-oidc" }
+                },
+                new UserClient
+                {
+                    Id = 6,
+                    ClientId = "MvvMClient",
+                    ClientName = "MvvMClient",
+                    Password = "secret",
+                    RedirectUris = new []{ "http://www.a.net:5003/signin-oidc", "http://www.a.net:5003/" }
                 }
             };
         }
@@ -56,12 +81,15 @@ namespace AuthServer.Stores
                     },
                     AllowedGrantTypes = {
                         GrantType.ClientCredentials,
-                        //GrantType.AuthorizationCode
+                        GrantType.AuthorizationCode
                     },
                     AllowedScopes = {
-                        "api1"
+                        "api1",
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile
                     },
-                    Enabled = true
+                    Enabled = true,
+                    RedirectUris = client.RedirectUris,
                 };
 
             return await Task.FromResult(c);

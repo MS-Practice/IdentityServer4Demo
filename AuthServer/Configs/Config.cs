@@ -1,4 +1,5 @@
-﻿using IdentityServer4;
+﻿using IdentityModel;
+using IdentityServer4;
 using IdentityServer4.Models;
 using System;
 using System.Collections.Generic;
@@ -18,7 +19,7 @@ namespace AuthServer.Configs
 
             return new IdentityResource[] {
                 new IdentityResources.OpenId(),
-                new IdentityResources.Profile(),
+                new IdentityResources.Profile()
                 //api1IdentityResource
             };
         }
@@ -60,7 +61,7 @@ namespace AuthServer.Configs
                     },
                     AllowedGrantTypes = GrantTypes.Code,
                     // 登录成功之后重定向的地址
-                    RedirectUris = { "http://localhost:5002/signin-oidc" },
+                    RedirectUris = { "http://localhost:5002/signin-oidc","http://localhost:5003/signin-oidc" },
 
                     // 退出登录重定向的地址
                     PostLogoutRedirectUris = { "http://localhost:5002/signout-callback-oidc" },

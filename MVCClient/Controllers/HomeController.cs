@@ -56,6 +56,12 @@ namespace MVCClient.Controllers
             };
         }
 
+        [HttpGet("lognin-oidc")]
+        public IActionResult LogninOcid()
+        {
+            return View("Index");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
