@@ -1,6 +1,5 @@
 ﻿using AuthServer.Entity;
-using BBSS.Platform.Core.Repository;
-using IdentityServer4.Models;
+using MS.Microservice.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -11,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace AuthServer.Repository
 {
-    public class ApiResourceRepository : BasicRepositoryBase<BBSSApiResource, int>
+    public class ApiResourceRepository : BasicRepositoryBase<BBSSApiResource,int>
     {
         private List<BBSSApiResource> source;
         public ApiResourceRepository()
@@ -23,18 +22,15 @@ namespace AuthServer.Repository
         {
             source = new List<BBSSApiResource>
             {
-                new BBSSApiResource{
-                    Id = 1,
+                new BBSSApiResource(1){
                     Name = "bbss.openapi",
                     DisplayName = "开放平台API",
                 },
-                new BBSSApiResource{
-                    Id = 2,
+                new BBSSApiResource(2){
                     Name = "jxgy.app",
                     DisplayName = "家校共育APP",
                 },
-                new BBSSApiResource{
-                    Id = 2,
+                new BBSSApiResource(3){
                     Name = "api1",
                     DisplayName = "api1",
                 }

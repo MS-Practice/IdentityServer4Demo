@@ -1,6 +1,5 @@
 ﻿using AuthServer.Entity;
 using AuthServer.Repository;
-using BBSS.Platform.Core.Repository;
 using IdentityServer4;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;

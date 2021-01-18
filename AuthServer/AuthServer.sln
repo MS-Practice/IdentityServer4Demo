@@ -11,11 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Client", "..\Client\Client.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVCClient", "..\MVCClient\MVCClient.csproj", "{B46551BD-F2E6-4689-9D0C-09BDC70D0938}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BBSS.Platform.Core", "..\..\..\Server\Src\BBSSPlatform\BBSS.Platform.Core\BBSS.Platform.Core.csproj", "{E97382D4-F2C0-45A0-8A1F-EC63A3FC7CA3}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JavaScriptClient", "..\JavaScriptClient\JavaScriptClient.csproj", "{9524898B-3267-4EB1-BA27-20DDD9014D0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVVMClient", "..\MVVMClient\MVVMClient.csproj", "{B00B6313-D598-42E6-B61A-B5594C5C60FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVMClient", "..\MVVMClient\MVVMClient.csproj", "{B00B6313-D598-42E6-B61A-B5594C5C60FC}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MS.Microservice.Core", "..\..\MS.Microservice\src\MS.Microservice.Core\MS.Microservice.Core.csproj", "{1A9B14EB-B7D6-4097-BFBC-BB6D991C89EE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MS.Microservice.Domain", "..\..\MS.Microservice\src\MS.Microservice.Domain\MS.Microservice.Domain.csproj", "{2EE1B4C5-0C59-4A44-9200-94FE98854383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,10 +41,6 @@ Global
 		{B46551BD-F2E6-4689-9D0C-09BDC70D0938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B46551BD-F2E6-4689-9D0C-09BDC70D0938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B46551BD-F2E6-4689-9D0C-09BDC70D0938}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E97382D4-F2C0-45A0-8A1F-EC63A3FC7CA3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E97382D4-F2C0-45A0-8A1F-EC63A3FC7CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E97382D4-F2C0-45A0-8A1F-EC63A3FC7CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E97382D4-F2C0-45A0-8A1F-EC63A3FC7CA3}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9524898B-3267-4EB1-BA27-20DDD9014D0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9524898B-3267-4EB1-BA27-20DDD9014D0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9524898B-3267-4EB1-BA27-20DDD9014D0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -51,6 +49,14 @@ Global
 		{B00B6313-D598-42E6-B61A-B5594C5C60FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B00B6313-D598-42E6-B61A-B5594C5C60FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B00B6313-D598-42E6-B61A-B5594C5C60FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A9B14EB-B7D6-4097-BFBC-BB6D991C89EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A9B14EB-B7D6-4097-BFBC-BB6D991C89EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A9B14EB-B7D6-4097-BFBC-BB6D991C89EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A9B14EB-B7D6-4097-BFBC-BB6D991C89EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EE1B4C5-0C59-4A44-9200-94FE98854383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EE1B4C5-0C59-4A44-9200-94FE98854383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EE1B4C5-0C59-4A44-9200-94FE98854383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EE1B4C5-0C59-4A44-9200-94FE98854383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

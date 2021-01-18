@@ -1,5 +1,5 @@
 ﻿using AuthServer.Entity;
-using BBSS.Platform.Core.Repository;
+using MS.Microservice.Domain;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;

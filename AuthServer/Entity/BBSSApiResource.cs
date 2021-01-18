@@ -1,16 +1,15 @@
-﻿using BBSS.Platform.Core.Entity;
-using IdentityServer4.Models;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using IdentityServer4.Models;
+using MS.Microservice.Domain;
 
 namespace AuthServer.Entity
 {
-    public class BBSSApiResource : IEntity<int>
+    public class BBSSApiResource : BaseEntity, IEntity<int>
     {
-        public int Id { get; set; }
+        public BBSSApiResource(int id) : base(id)
+        {
+        }
+
+        public override int Id { get; }
         public string Secret { get; set; }
         /// <summary>
         /// 表示唯一的资源名称
